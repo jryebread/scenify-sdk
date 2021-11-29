@@ -59,7 +59,6 @@ class EventsHandler extends BaseHandler {
       this.context.setActiveObject(null)
       e.path.set();
       this.handlers.historyHandler.save('object:created')
-
       this.canvas.renderAll()
     }
   }

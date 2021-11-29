@@ -4,12 +4,14 @@ import BaseHandler from './BaseHandler'
 
 class CanvasHandler extends BaseHandler {
   public options: CanvasOptions
+  public brushWidth: number
   constructor(props: HandlerOptions) {
     super(props)
     this.options = {
       width: props.canvas.width,
-      height: props.canvas.height
+      height: props.canvas.height,
     }
+    this.brushWidth = 30
   }
   
   setDrawingMode(setting) {
@@ -17,16 +19,21 @@ class CanvasHandler extends BaseHandler {
     //this.canvas.requestRenderAll()
   }
 
+  setBrushWidth(setting) {
+    this.brushWidth = setting
+    this.canvas.freeDrawingBrush.width = this.brushWidth
+  }
+
   setTexturePatternBrush = async imgURL => {
     this.context.setActiveObject(null)
     this.canvas.isDrawingMode = true
-    let texturePatternBrush : any = new fabric.PatternBrush(this.canvas);
-    texturePatternBrush.source = imgURL;
-    texturePatternBrush.width = 50;
+    let texturePatternBrush : any = new fabric.PatternBrush(this.canvas)
+    texturePatternBrush.source = imgURL
+
+    texturePatternBrush.width = this.brushWidth
     this.canvas.freeDrawingBrush = texturePatternBrush
     
     this.canvas.requestRenderAll()
-
   }
 
   resize(nextWidth, nextHeight) {

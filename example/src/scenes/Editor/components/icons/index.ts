@@ -23,6 +23,7 @@ import ToBack from './ToBack'
 import Backward from './Backward'
 import Undo from './Undo'
 import Redo from './Redo'
+import Brush from './Brush'
 class Icons {
   static Background = Background
   static Elements = Elements
@@ -32,6 +33,7 @@ class Icons {
   static Locked = Locked
   static UnLocked = UnLocked
   static Bold = Bold
+  static Brush = Brush
   static Italic = Italic
   static TextColor = TextColor
   static FillColor = FillColor

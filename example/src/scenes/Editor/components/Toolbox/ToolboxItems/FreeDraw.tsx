@@ -13,6 +13,7 @@ function FreeDraw() {
   const { setActiveSubMenu } = useAppContext()
 
   return (
+    
     <div
       style={{
         flex: 1,
@@ -22,13 +23,18 @@ function FreeDraw() {
         padding: '0 1rem',
       }}
     >
+      <div>
+        <input type="range" name="volume"
+              min="0" max="11"/>
+        <label>Volume</label>
+      </div>  
       <Button
         onClick={() => setActiveSubMenu(SubMenuType.COLOR)}
         size={SIZE.compact}
         kind={KIND.tertiary}
         shape={SHAPE.square}
-      >
-        <Icons.FillColor size={24} color="#000000" />
+      >      
+  <Icons.FillColor size={24} color="#000000" />
       </Button>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Position />

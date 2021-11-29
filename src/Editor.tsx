@@ -179,6 +179,10 @@ class Editor extends EventManager {
     this.handlers.canvasHandler.setDrawingMode(options)
   }
 
+  public setBrushWidth = (options: any) => {
+    this.handlers.canvasHandler.setBrushWidth(options)
+  }
+
   public setBrushTexture = (options: any) => {
     let img = new Image();
     img.src = options.metadata.src
