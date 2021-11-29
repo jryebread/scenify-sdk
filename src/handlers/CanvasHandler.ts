@@ -11,6 +11,24 @@ class CanvasHandler extends BaseHandler {
       height: props.canvas.height
     }
   }
+  
+  setDrawingMode(setting) {
+    this.canvas.isDrawingMode = setting
+    //this.canvas.requestRenderAll()
+  }
+
+  setTexturePatternBrush = async imgURL => {
+    this.context.setActiveObject(null)
+    this.canvas.isDrawingMode = true
+    let texturePatternBrush : any = new fabric.PatternBrush(this.canvas);
+    texturePatternBrush.source = imgURL;
+    texturePatternBrush.width = 50;
+    this.canvas.freeDrawingBrush = texturePatternBrush
+    
+    this.canvas.requestRenderAll()
+
+  }
+
   resize(nextWidth, nextHeight) {
     this.canvas.setWidth(nextWidth).setHeight(nextHeight)
     this.canvas.renderAll()

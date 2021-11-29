@@ -8,6 +8,8 @@ import { useEditor } from '../../../../../../../src'
 
 function Panel() {
   const editor = useEditor()
+  editor.setDrawingMode(false)
+
   const [value, setValue] = useState('')
   const { shapes } = useAppContext()
   return (

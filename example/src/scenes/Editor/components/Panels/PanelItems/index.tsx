@@ -6,6 +6,7 @@ import Elements from './Elements'
 import FontFamily from './FontFamily'
 import Color from './Color'
 import Images from './Images'
+import FreeDraw from './FreeDraw'
 import Illustrations from './Illustrations'
 
 class PanelItems {
@@ -17,6 +18,7 @@ class PanelItems {
   static FontFamily = FontFamily
   static Color = Color
   static Images = Images
+  static FreeDraw = FreeDraw
   static Illustrations = Illustrations
 }
 

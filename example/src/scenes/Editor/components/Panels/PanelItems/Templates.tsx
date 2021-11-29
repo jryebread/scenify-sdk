@@ -9,6 +9,7 @@ import { useEditor } from '../../../../../../../src'
 
 function Templates() {
   const editor = useEditor()
+  
   const { templates } = useAppContext()
   const [value, setValue] = useState('')
   return (

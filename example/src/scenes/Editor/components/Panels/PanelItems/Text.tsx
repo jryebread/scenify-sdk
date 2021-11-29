@@ -9,6 +9,7 @@ import { useState } from 'react'
 function Panel() {
   const [value, setValue] = useState('')
   const editor = useEditor()
+  editor.setDrawingMode(false)
 
   const addHeading = () => {
     const options = {

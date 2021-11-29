@@ -5,7 +5,6 @@ class CanvasController {
   constructor(handler: CanvasHandler) {
     this.handler = handler
   }
-
   resize(nextWidth, nextHeight) {
     this.handler.resize(nextWidth, nextHeight)
   }

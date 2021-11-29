@@ -13,6 +13,8 @@ function Images() {
   const [images, setImages] = useState<PixabayImage[]>([])
   const [value] = useDebounce(search, 1000)
   const editor = useEditor()
+  editor.setDrawingMode(false)
+
   useEffect(() => {
     getPixabayImages('people')
       .then(data => setImages(data))

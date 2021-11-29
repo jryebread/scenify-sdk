@@ -13,6 +13,7 @@ class Icons {
   static Search = Search
   static Images = Images
   static Illustrations = Illustrations
+  static FreeDraw = Illustrations
 }
 
 export default Icons

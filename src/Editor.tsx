@@ -173,6 +173,18 @@ class Editor extends EventManager {
   public destroy = () => {
     this.handlers.destroy()
   }
+
+  // BRUSH
+  public setDrawingMode = (options: any) => {
+    this.handlers.canvasHandler.setDrawingMode(options)
+  }
+
+  public setBrushTexture = (options: any) => {
+    let img = new Image();
+    img.src = options.metadata.src
+    this.handlers.canvasHandler.setTexturePatternBrush(img)
+  }
+
 }
 
 export default Editor

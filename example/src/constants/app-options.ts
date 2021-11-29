@@ -4,7 +4,7 @@ export const panelListItems = [
     name: 'Templates',
   },
   {
-    id: 'elements',
+    id: 'elements', 
     name: 'Elements',
   },
   {
@@ -18,6 +18,10 @@ export const panelListItems = [
   {
     id: 'illustrations',
     name: 'Illustrations',
+  },
+  {
+    id: 'freeDraw',
+    name: 'FreeDraw',
   },
   {
     id: 'background',
