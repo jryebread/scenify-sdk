@@ -15,7 +15,6 @@ class EventsHandler extends BaseHandler {
     this.canvas.wrapperEl.style.outline = 'none'
     // @ts-ignore
     this.canvas.on({
-      'path:created': this.handleDraw,
       'mouse:down': this.onMouseDown,
       'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
@@ -30,7 +29,6 @@ class EventsHandler extends BaseHandler {
 
   destroy() {
     this.canvas.off({
-      'path:created': this.handleDraw,
       'mouse:down': this.onMouseDown,
       'mouse:up': this.handleSelection,
       'selection:cleared': this.handleSelection,
@@ -51,15 +49,6 @@ class EventsHandler extends BaseHandler {
       this.context.setContextMenuRequest({ left: e.e.offsetX, top: e.e.offsetY, target: e.target })
     } else {
       this.context.setContextMenuRequest(null)
-    }
-  }
-  
-  handleDraw = (e : any) => {
-    if (this.canvas.isDrawingMode) {
-      this.context.setActiveObject(null)
-      e.path.set();
-      this.handlers.historyHandler.save('object:created')
-      this.canvas.renderAll()
     }
   }
 

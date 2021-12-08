@@ -23,8 +23,12 @@ class TemplateHandler extends BaseHandler {
 
     const objects = canvasJSON.objects.filter(object => object.type !== ObjectType.FRAME)
     objects.forEach(object => {
+      if (object.type == "path") {
+        console.log("PATH!", object)
+      }
       const exportedObject = exportObject.run(object, frameOptions)
       template.objects = template.objects.concat(exportedObject)
+      console.log(template.objects)
     })
 
     return template

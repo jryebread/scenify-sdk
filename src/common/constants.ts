@@ -13,7 +13,8 @@ export enum ObjectType {
   ACTIVE_SELECTION = 'activeSelection',
   BACKGROUND = 'Background',
   GROUP = 'group',
-  FRAME = 'Frame'
+  FRAME = 'Frame',
+  FREE_DRAW = 'path'
 }
 
 export enum ObjectTypeAlt {

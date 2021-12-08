@@ -14,6 +14,14 @@ function FreeDraw() {
     const [value] = useDebounce(search, 1000)
     const editor = useEditor()
 
+    // const addImageToCanvas = url => {
+    //   const options = {
+    //     type: 'StaticImage',
+    //     metadata: { src: url }
+    //   }
+    //   editor.add(options)
+    // }
+
     // set drawing mode true and brush texture to default first image
     useEffect(() => {
      // set default 
@@ -31,7 +39,7 @@ function FreeDraw() {
       }
     }, [value])
   
-    const addImageToCanvas = url => {
+    const setImageBrushTexture = url => {
       const options = {
         type: 'FreeDraw',
         metadata: { src: url },
@@ -64,7 +72,7 @@ function FreeDraw() {
                     alignItems: 'center',
                     cursor: 'pointer',
                   }}
-                  onClick={() => addImageToCanvas(img.webformatURL)}
+                  onClick={() => setImageBrushTexture(img.webformatURL)}
                 >
                   <img width="100%" src={img.previewURL} alt="preview" />
                 </div>

@@ -5,6 +5,8 @@ import BaseHandler from './BaseHandler'
 class CanvasHandler extends BaseHandler {
   public options: CanvasOptions
   public brushWidth: number
+  public texturePatternBrush : any = new fabric.PatternBrush(this.canvas)
+  public freeDrawOptions : Object = new Object()
   constructor(props: HandlerOptions) {
     super(props)
     this.options = {
@@ -12,11 +14,27 @@ class CanvasHandler extends BaseHandler {
       height: props.canvas.height,
     }
     this.brushWidth = 30
+    
+    this.initialize()
+  }
+
+  initialize() { 
+    // @ts-ignore
+    this.canvas.on({
+      'path:created': this.handleDrawnPath,
+    })
+  }
+
+  handleDrawnPath = (e : any) => {
+      console.log("test", e)
+      e.path.set()
+      this.context.setActiveObject(null)
+      this.handlers.historyHandler.save('object:created')
+      this.canvas.renderAll()
   }
   
   setDrawingMode(setting) {
     this.canvas.isDrawingMode = setting
-    //this.canvas.requestRenderAll()
   }
 
   setBrushWidth(setting) {
@@ -24,14 +42,17 @@ class CanvasHandler extends BaseHandler {
     this.canvas.freeDrawingBrush.width = this.brushWidth
   }
 
-  setTexturePatternBrush = async imgURL => {
+  setTexturePatternBrush = async imgOptions => {
+    this.freeDrawOptions = imgOptions
+    let img = new Image();
+    img.src = imgOptions.metadata.src
+    
     this.context.setActiveObject(null)
     this.canvas.isDrawingMode = true
-    let texturePatternBrush : any = new fabric.PatternBrush(this.canvas)
-    texturePatternBrush.source = imgURL
+    this.texturePatternBrush.source = img
 
-    texturePatternBrush.width = this.brushWidth
-    this.canvas.freeDrawingBrush = texturePatternBrush
+    this.texturePatternBrush.width = this.brushWidth
+    this.canvas.freeDrawingBrush = this.texturePatternBrush
     
     this.canvas.requestRenderAll()
   }

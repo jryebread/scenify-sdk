@@ -8,6 +8,8 @@ class DesignHandler extends BaseHandler {
     const staticCanvas = new fabric.StaticCanvas(null)
     const template = this.handlers.templateHandler.exportToJSON() as Template
     await this.loadTemplate(staticCanvas, template, params)
+    staticCanvas.requestRenderAll()
+    this.canvas = staticCanvas
     const data = staticCanvas.toDataURL({
       multiplier: 3,
       top: 0,

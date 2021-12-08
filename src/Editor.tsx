@@ -184,9 +184,7 @@ class Editor extends EventManager {
   }
 
   public setBrushTexture = (options: any) => {
-    let img = new Image();
-    img.src = options.metadata.src
-    this.handlers.canvasHandler.setTexturePatternBrush(img)
+    this.handlers.canvasHandler.setTexturePatternBrush(options)
   }
 
 }

@@ -31,6 +31,9 @@ class ObjectToFabric {
       case ObjectType.GROUP:
         object = await this[ObjectType.GROUP](item, params)
         break
+      case ObjectType.FREE_DRAW:
+        object = await this[ObjectType.FREE_DRAW](item)
+        break
     }
     return object as fabric.Object
   }
@@ -127,6 +130,25 @@ class ObjectToFabric {
           // scaleX: 0.2
         })
         element.scaleToWidth(item.width)
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
+  
+  [ObjectType.FREE_DRAW](item: any) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log("o2F: ", item)
+        //const baseOptions = this.getBaseOptions(item)
+        var baseOptions = await Object.assign({}, item);
+        delete baseOptions.path
+
+        const pathData = item.path
+        console.log(baseOptions, pathData)
+        const element = new fabric.Path(pathData, baseOptions)
         resolve(element)
       } catch (err) {
         reject(err)

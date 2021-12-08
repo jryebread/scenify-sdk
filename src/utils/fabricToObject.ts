@@ -29,6 +29,9 @@ class ExportObject {
       case ObjectType.GROUP:
         object = this[ObjectType.GROUP](item, options, inGroup)
         break
+      case ObjectType.FREE_DRAW:
+        object = this[ObjectType.FREE_DRAW](item, options, inGroup)
+        break
     }
     return object
   }
@@ -108,6 +111,13 @@ class ExportObject {
     }
 
     return object
+  }
+
+  [ObjectType.FREE_DRAW](item, options, inGroup) {
+    //const baseOptions = this.getBaseOptions(item, options, inGroup)
+    console.log("FINAL OBJECT", item)
+
+    return item
   }
 
   [ObjectType.DYNAMIC_IMAGE](item, options, inGroup) {

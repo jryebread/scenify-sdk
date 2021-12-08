@@ -194,6 +194,30 @@ class ObjectToFabric {
     })
   }
 
+  [ObjectType.FREE_DRAW](item, options, inGroup) {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const baseOptions = this.getBaseOptions(item, options, inGroup)
+        const path = item.metadata.value
+        const fill = item.metadata.fill
+        const element = new fabric.StaticPath({ ...baseOptions, path, fill: fill ? fill : '#000000' })
+
+        const { top, left } = element
+
+        if (isNaN(top) || isNaN(left)) {
+          element.set({
+            top: options.top,
+            left: options.left
+          })
+          element.scaleToWidth(320)
+        }
+        resolve(element)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
+
   [ObjectType.GROUP](item, options, inGroup) {
     return new Promise(async (resolve, reject) => {
       try {
