@@ -138,52 +138,42 @@ class ObjectToFabric {
   }
 
   
-  [ObjectType.FREE_DRAW](path: any) {
+  [ObjectType.FREE_DRAW](item: any) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log('pathin objectToFabric', path)
-        // const baseOptions = await Object.assign({}, item);
-        // delete baseOptions.path
+        const baseOptions = await Object.assign({}, item);
+        delete baseOptions.path
         
-        // const pathData = item.path
-        // console.log("baseOptions", baseOptions)
-        // console.log("pathData", pathData)
-        // const element = new fabric.Path(pathData, baseOptions)
+        const pathData = item.path
+        console.log("baseOptions", baseOptions)
+        console.log("pathData", pathData)
+        const element = new fabric.Path(pathData, baseOptions)
 
-        fabric.util.loadImage(path.stroke.source.src, img => {
-          path.set('stroke',
-          new fabric.Pattern({
-            crossOrigin: '',
-            offsetX: path.stroke.offsetX,
-            offsetY: path.stroke.offsetY,
-            repeat: 'repeat',
-            source: img
-          }))
-          delete path['undefined']
+        fabric.util.loadImage(item.stroke.source, img => {
+          element.set(
+            'stroke',
+            // @ts-ignore
+            new fabric.Pattern({
+              crossOrigin:'',
+              offsetX: baseOptions.stroke.offsetX,
+              offsetY: baseOptions.stroke.offsetY,
+              patternTransform: null,
+              repeat: 'repeat',
+              source: img
+            })
+          )
+          element.set('height', baseOptions['height'])
+          element.set('width', baseOptions['width'])
 
-          // element.set(
-          //   'stroke',
-          //   // @ts-ignore
-          //   new fabric.Pattern({
-          //     crossOrigin:'',
-          //     offsetX: baseOptions.stroke.offsetX,
-          //     offsetY: baseOptions.stroke.offsetY,
-          //     patternTransform: null,
-          //     repeat: 'repeat',
-          //     source: img
-          //   })
-          // )
-          // element.set('height', baseOptions['height'])
-          // element.set('width', baseOptions['width'])
-          // delete element['cacheTranslationX']
-          // delete element['cacheWidth']
-          // element.set(
-          //   'path',
-          //   // @ts-ignore
-          //   pathData
-          // )
-          // console.log("final element", element)
-          resolve(path)
+          delete element['cacheTranslationX']
+          
+          element.set(
+            'path',
+            // @ts-ignore
+            pathData
+          )
+          console.log("final element", element)
+          resolve(element)
         }, null, 'anonymous')
 
       } catch (err) {

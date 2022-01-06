@@ -26,9 +26,6 @@ class DesignHandler extends BaseHandler {
     for (const object of template.objects) {
       const element = await objectToFabric.run(object, params)
       if (element) {
-        if (element.type == "path" ) {
-          console.log("FOUNDPATH", element)
-        }
         staticCanvas.add(element)
       } else {
         console.log('UNABLE TO LOAD OBJECT: ', object)
