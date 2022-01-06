@@ -2,13 +2,25 @@ import { ObjectType } from '../common/constants'
 import exportObject from '../utils/fabricToObject'
 import objectToFabric from '../utils/objectToFabric'
 import BaseHandler from './BaseHandler'
+import { fabric } from 'fabric'
 
 class TemplateHandler extends BaseHandler {
   exportToJSON() {
+    // let pathJson : any = new Array();
+    // pathJson = CanvasHandler
+    // this.objects.forEach(object => {
+    //   if (object.type == "path") {
+    //     console.log("A PATH!", object)
+    //     const test : any = object.toJSON()
+    //     console.log(test)
+    //     pathJson.push(object.toJSON())
+    //   }
+    // })
+    let drawnPathObjects : fabric.Path[] = this.handlers.canvasHandler.drawnPathObjects
     const canvasJSON: any = this.canvas.toJSON(this.handlers.propertiesToInclude)
     const frameOptions = this.handlers.frameHandler.getOptions()
 
-    const template = {
+    var template = {
       name: 'Untitled design',
       objects: [],
       background: {
@@ -20,16 +32,22 @@ class TemplateHandler extends BaseHandler {
         height: frameOptions.height
       }
     }
-
-    const objects = canvasJSON.objects.filter(object => object.type !== ObjectType.FRAME)
+    // fabric.util.enlivenObjects(pathJson, (enlivedPaths: fabric.Object[]) => {
+    //     template.objects.push(...enlivedPaths)
+    // }, '')
+    template.objects.push(...drawnPathObjects)
+    var objects = canvasJSON.objects.filter(object => object.type !== ObjectType.FRAME 
+      && object.type !== ObjectType.FREE_DRAW)
     objects.forEach(object => {
       if (object.type == "path") {
-        console.log("PATH!", object)
+        console.log("THIS SHOULD NOT BE REACHED BADDDD!!!", object)
       }
       const exportedObject = exportObject.run(object, frameOptions)
       template.objects = template.objects.concat(exportedObject)
-      console.log(template.objects)
     })
+
+
+    console.log(template.objects)
 
     return template
   }

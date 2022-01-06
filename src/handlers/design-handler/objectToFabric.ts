@@ -138,18 +138,54 @@ class ObjectToFabric {
   }
 
   
-  [ObjectType.FREE_DRAW](item: any) {
+  [ObjectType.FREE_DRAW](path: any) {
     return new Promise(async (resolve, reject) => {
       try {
-        console.log("o2F: ", item)
-        //const baseOptions = this.getBaseOptions(item)
-        var baseOptions = await Object.assign({}, item);
-        delete baseOptions.path
+        console.log('pathin objectToFabric', path)
+        // const baseOptions = await Object.assign({}, item);
+        // delete baseOptions.path
+        
+        // const pathData = item.path
+        // console.log("baseOptions", baseOptions)
+        // console.log("pathData", pathData)
+        // const element = new fabric.Path(pathData, baseOptions)
 
-        const pathData = item.path
-        console.log(baseOptions, pathData)
-        const element = new fabric.Path(pathData, baseOptions)
-        resolve(element)
+        fabric.util.loadImage(path.stroke.source.src, img => {
+          path.set('stroke',
+          new fabric.Pattern({
+            crossOrigin: '',
+            offsetX: path.stroke.offsetX,
+            offsetY: path.stroke.offsetY,
+            repeat: 'repeat',
+            source: img
+          }))
+          delete path['undefined']
+
+          // element.set(
+          //   'stroke',
+          //   // @ts-ignore
+          //   new fabric.Pattern({
+          //     crossOrigin:'',
+          //     offsetX: baseOptions.stroke.offsetX,
+          //     offsetY: baseOptions.stroke.offsetY,
+          //     patternTransform: null,
+          //     repeat: 'repeat',
+          //     source: img
+          //   })
+          // )
+          // element.set('height', baseOptions['height'])
+          // element.set('width', baseOptions['width'])
+          // delete element['cacheTranslationX']
+          // delete element['cacheWidth']
+          // element.set(
+          //   'path',
+          //   // @ts-ignore
+          //   pathData
+          // )
+          // console.log("final element", element)
+          resolve(path)
+        }, null, 'anonymous')
+
       } catch (err) {
         reject(err)
       }

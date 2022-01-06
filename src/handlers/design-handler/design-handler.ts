@@ -8,8 +8,6 @@ class DesignHandler extends BaseHandler {
     const staticCanvas = new fabric.StaticCanvas(null)
     const template = this.handlers.templateHandler.exportToJSON() as Template
     await this.loadTemplate(staticCanvas, template, params)
-    staticCanvas.requestRenderAll()
-    this.canvas = staticCanvas
     const data = staticCanvas.toDataURL({
       multiplier: 3,
       top: 0,
@@ -28,6 +26,9 @@ class DesignHandler extends BaseHandler {
     for (const object of template.objects) {
       const element = await objectToFabric.run(object, params)
       if (element) {
+        if (element.type == "path" ) {
+          console.log("FOUNDPATH", element)
+        }
         staticCanvas.add(element)
       } else {
         console.log('UNABLE TO LOAD OBJECT: ', object)
