@@ -142,6 +142,9 @@ class ObjectToFabric {
     return new Promise(async (resolve, reject) => {
       try {
         const baseOptions = await Object.assign({}, item);
+        baseOptions.objectCaching = false
+        baseOptions.hasControls = false
+        baseOptions.hasBorders = false
         delete baseOptions.path
         
         const pathData = item.path
@@ -164,9 +167,22 @@ class ObjectToFabric {
           )
           element.set('height', baseOptions['height'])
           element.set('width', baseOptions['width'])
+          element.set('top', baseOptions['top'] + 36.5) //higher, more lower
+          element.set('left', baseOptions['left'] + 263.5) //higher more right
+          element.set('originX', "left")
+          element.set('originY', "top")
 
-          delete element['cacheTranslationX']
-          
+          delete element['scaleX']
+          delete element['scaleY']
+          delete element['skewX']
+          delete element['skewY']
+
+          delete element['flipX']
+          delete element['flipY']
+          delete element['angle']
+          delete element['strokeDashOffset']
+          delete element['strokeUniform']
+          delete element['version']
           element.set(
             'path',
             // @ts-ignore

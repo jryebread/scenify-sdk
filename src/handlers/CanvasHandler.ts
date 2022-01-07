@@ -1,5 +1,4 @@
 import { fabric } from 'fabric'
-import { Path } from 'fabric/fabric-impl'
 import { CanvasOptions, HandlerOptions } from '../common/interfaces'
 import BaseHandler from './BaseHandler'
 
@@ -8,7 +7,7 @@ class CanvasHandler extends BaseHandler {
   public brushWidth: number
   public texturePatternBrush : any = new fabric.PatternBrush(this.canvas)
   public freeDrawOptions : Object = new Object()
-  public drawnPathObjects : fabric.Path[] = new Array()
+  public drawnPathObjects : any = new Array()
   constructor(props: HandlerOptions) {
     super(props)
     this.options = {
